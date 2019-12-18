@@ -15,5 +15,12 @@ class MainController extends AbstractController
         return $this->render('mainPage/mainPageIndex.html.twig');
     }
 
+    /**
+     * @Route("/questions", name="questionPage")
+     */
+    public function question()
+    {
+        return $this->render('questionPage/questionPageIndex.html.twig');
+    }
 
 }
