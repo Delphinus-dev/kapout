@@ -1,4 +1,4 @@
-#!/usr/bin/bash
+#!/bin/bash
 git checkout dev
 git pull
 php composer.phar self-update

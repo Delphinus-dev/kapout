@@ -1,4 +1,4 @@
-#!/usr/bin/bash
+#!/bin/bash
 php composer.phar self-update
 php composer.phar install
 yarn install
