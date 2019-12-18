@@ -5,13 +5,13 @@ namespace App\Controller;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\Routing\Annotation\Route;
 
-class KapoutController extends AbstractController
+class TestController extends AbstractController
 {
     /**
-     * @Route("/", name="mainPage")
+     * @Route("/test", name="testPage")
      */
     public function index()
     {
-        return $this->render('mainPage/mainPageIndex.html.twig');
+        return $this->render('testPage/testPageIndex.html.twig');
     }
 }
