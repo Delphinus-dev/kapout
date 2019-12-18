@@ -15,7 +15,7 @@
 /phpunit.xml
 ###< symfony/phpunit-bridge ###
 /node_modules/
-/.idea/
+/.idea
 ###> symfony/webpack-encore-bundle ###
 /public/build/
 npm-debug.log
