@@ -64,8 +64,8 @@ class MainController extends AbstractController
                         }
                     }
                 $i++;
+            json_encode($getQuestion, JSON_FORCE_OBJECT);
             }
-            json_encode($getQuestion, true);
         // foreach pour faire sauter les entrées vides
         // foreach shufflisation des données par personne
         // récupération des 3 réponses justes
@@ -73,7 +73,7 @@ class MainController extends AbstractController
         // recolle tout ça dans un tableau dans le bon sens par rapport aux besoins d'Amca
         // json_encode
 
-        var_dump($getQuestion);
+         var_dump($getQuestion);
         return $this->render('questionPage/index.html.twig', [
             'apians' => $apiGet
         ]);
