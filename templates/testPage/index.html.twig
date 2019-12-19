@@ -15,25 +15,6 @@
 {% block javascripts %}
     {{ parent() }}
     <script>
-        // On va se placer sur le topic "demo" partout dans cet exemple
-        var topic = 'questions';
-        var scoreBoard = document.querySelector('#scoreBoard');
-        // Note: je vais utiliser partout ici des templates litterals JS, plus lisibles,
-        // au lieu de quotes on a des backtics (`), et deans on peut afficher des variables avec ${}.
-        // La syntaxe va vous rappeler PHP old-school :)
-        scoreBoard.insertAdjacentHTML('beforeEnd', `Écoute du topic ${topic}`);
-        // localhost est l'adresse du serveur Mercure
-        const url = new URL('http://localhost/hub');
-        // Et on rajoute les topics auxquels s'inscrire (en paramètre GET)
-        url.searchParams.append('topic', `http://localhost/${topic}`);
-        const eventSource = new EventSource(url);
-        // Ce callback sera appelé à chaque réception de message
-        eventSource.onmessage = function(event) {
-            console.log(`Reçu un message avec l\'ID ${event.lastEventId}`);
-            const details = JSON.parse(event.data);
-            scoreBoard.insertAdjacentHTML('beforeEnd', `<p>${details.eventName}</p>`);
-        };
-        console.log('Client démarré!');
     </script>
 {% endblock %}
 
