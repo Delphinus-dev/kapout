@@ -31,8 +31,12 @@ class ApiGet
         $id = range(1,731);
         shuffle($id);
 
+
         $apiAns = [];
         for ($i = 1; $i < 8; $i ++) {
+/*            for ($a = 1; $a < 4 ; $a ++)
+            {
+                $apiAns[$i[$a]];*/
 
 
             $client = HttpClient::create();
@@ -55,7 +59,8 @@ class ApiGet
                 array_push($apiAns, $content);
                 // array_rand(array($heroes), 1);
             }
-        }
+            }
+
 
         return $apiAns;
     }
