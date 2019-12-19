@@ -1,0 +1,109 @@
+{% extends 'base.html.twig' %}
+
+{% block stylesheets %}
+   <script src="https://kit.fontawesome.com/a7734cc269.js" crossorigin="anonymous"></script>
+
+
+{% endblock %}
+
+{% block title %}Hello TestXavController!{% endblock %}
+
+{% block body %}
+    <div class="container align-content-center">
+        <div class="col-12">
+            <h1 class="question my-4" id="question">ICI TEXTE DE LA QUESTION</h1>
+        </div>
+        <div class="col-12 row justify-content-around">
+            <div class="timer" id="timer">
+                <div>Truc qui donne le temps restant</div>
+                <div id="timer_time"></div>
+            </div>
+            <div class="card" style="width: 18rem;">
+                <img class="card-img-top" id="image" src="https://www.superherodb.com/pictures2/portraits/10/100/1496.jpg" alt="Mon super héros">
+            </div>
+            <div class="nbAnswers column">
+                <div>Réponses reçues</div>
+                <div id="nbReponses"></div>
+            </div>
+        </div>
+        <div class="card-deck">
+            <div class="card row">
+                <div class="card-body">
+                    <div class="rouge row" >
+                        <div class="col-md-4">
+                            <i class="fas fa-snowman my-2 col-md-6" style="font-size: 6em"></i>
+                        </div>
+                        <div class="col-md-8" id="reponseRouge">
+                            Reponse A , je prend la réponse A
+                            </div>
+                    </div>
+                    <div class="verte row">
+                        <div class="col-md-4">
+                             <i class="fas fa-holly-berry my-2" style="font-size: 6em"></i>
+                        </div>
+                        <div class="col-md-8" id="reponseVerte">
+                            Reponse B , je prend la réponse B
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="card row">
+                <div class="card-body">
+                    <div class="blanche row" >
+                        <div class="col-md-4">
+                            <i class="fas fa-candy-cane my-2 col-md-6" style="font-size: 6em"></i>
+                        </div>
+                        <div class="col-md-8" id="reponseBlanche">
+                            Reponse C , je prend la réponse C
+                        </div>
+                    </div>
+                    <div class="doree row" >
+                        <div class="col-md-4">
+                            <i class="fas fa-snowflake my-2" style="font-size: 6em"></i>
+                        </div>
+                        <div class="col-md-8" id="reponseDoree">
+                            Reponse D , je prend la réponse D
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    {% include 'footer.html.twig' %}
+{% endblock %}
+
+{% block javascripts %}
+
+    <script>
+        const url = new URL('http://mercure.mr486.com/.well-known/mercure');
+        url.searchParams.append('topic', 'question');
+        const eventSource = new EventSource(url);
+        // eventSource.onmessage = e => console.log(e);
+        eventSource.onmessage = e => {
+
+            const obj = JSON.parse(e.data);
+
+            document.getElementById('question').innerHTML = obj['question'];
+            document.getElementById('nbReponses').innerHTML = obj['nbReponses'];
+            document.getElementById('image').setAttribute("src", obj['image']);
+            document.getElementById('timer').innerHTML = obj['timer'];
+
+            let p = document.createElement("span");
+            p.innerHTML = obj['reponseRouge'];
+            document.getElementById('reponseRouge').appendChild(p);
+
+            p = document.createElement("span");
+            p.innerHTML = obj['reponseVerte'];
+            document.getElementById('reponseVerte').appendChild(p);
+
+            p = document.createElement("span");
+            p.innerHTML = obj['reponseBlanche'];
+            document.getElementById('reponseBlanche').appendChild(p);
+
+            p = document.createElement("span");
+            p.innerHTML = obj['reponseDoree'];
+            document.getElementById('reponseDoree').appendChild(p);
+        }
+    </script>
+{% endblock %}
+
