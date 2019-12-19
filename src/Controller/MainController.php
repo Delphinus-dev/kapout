@@ -48,8 +48,24 @@ class MainController extends AbstractController
             foreach ($apiGet as $key => $value){
                 $getQuestion[$i]['fullname'] = $apiGet[$key]['biography']['full-name'];
                 $getQuestion[$i]['gender'] = $apiGet[$key]['appearance']['gender'];
+                $getQuestion[$i]['alignment'] = $apiGet[$key]['biography']['alignment'];
+                $getQuestion[$i]['race'] = $apiGet[$key]['appearance']['race'];
+                $getQuestion[$i]['eye-color'] = $apiGet[$key]['appearance']['eye-color'];
+                $getQuestion[$i]['base'] = $apiGet[$key]['work']['base'];
+                $getQuestion[$i]['occupation'] = $apiGet[$key]['work']['occupation'];
+                $getQuestion[$i]['publisher'] = $apiGet[$key]['biography']['publisher'];
+                    foreach ($getQuestion[$i] as $k2 => $v2) {
+                        if (
+                            $v2 == 'null' ||
+                            $v2 == "-" ||
+                            $v2 == "") {
+
+                            unset($getQuestion[$i][$k2]);
+                        }
+                    }
                 $i++;
             }
+            json_encode($getQuestion, true);
         // foreach pour faire sauter les entrées vides
         // foreach shufflisation des données par personne
         // récupération des 3 réponses justes
