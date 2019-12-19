@@ -15,11 +15,9 @@
 /phpunit.xml
 ###< symfony/phpunit-bridge ###
 /node_modules/
-/.idea
+.idea/
 ###> symfony/webpack-encore-bundle ###
 /public/build/
 npm-debug.log
 yarn-error.log
 ###< symfony/webpack-encore-bundle ###
-/.idea/composerJson.xml
-symfony.lock
