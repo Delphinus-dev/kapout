@@ -12,7 +12,7 @@ class MainController extends AbstractController
      */
     public function index()
     {
-        return $this->render('mainPage/mainPageIndex.html.twig');
+        return $this->render('index.html.twig');
     }
 
     /**
@@ -20,7 +20,7 @@ class MainController extends AbstractController
      */
     public function question()
     {
-        return $this->render('questionPage/questionPageIndex.html.twig');
+        return $this->render('index.html.twig');
     }
 
     /**
@@ -28,6 +28,14 @@ class MainController extends AbstractController
      */
     public function test()
     {
-        return $this->render('testPage/testPageIndex.html.twig');
+        return $this->render('index.html.twig');
+    }
+
+    /**
+     * @Route("/backoffice", name="boPage")
+     */
+    public function backoffice()
+    {
+        return $this->render('backOffice/index.html.twig');
     }
 }

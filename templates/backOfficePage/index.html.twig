@@ -1,0 +1,21 @@
+{% extends "base.html.twig" %}
+
+{% block title %}Back Office{% endblock %}
+
+{% block stylesheets %}
+    {{ parent() }}
+    {{ encore_entry_link_tags('app') }}
+{% endblock %}
+
+{% block body %}
+    {{ parent() }}
+    <h1>Back Office</h1>
+    <a class="btn btn-primary" href="/godata" role="button">Envoyer infos</a>
+{% endblock %}
+
+{% block javascripts %}
+    {{ parent() }}
+{% endblock %}
+
+
+
