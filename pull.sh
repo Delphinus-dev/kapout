@@ -1,5 +1,5 @@
 #!/bin/bash
-git checkout master
+git checkout dev
 git pull
 php composer.phar self-update
 php composer.phar install
