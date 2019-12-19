@@ -1,21 +1,20 @@
 {% extends "base.html.twig" %}
 
-{% block title %}Back Office{% endblock %}
+{% block title %}Bienvenue sur Kapout !{% endblock %}
 
 {% block stylesheets %}
-    {{ parent() }}
+    <link href="https://fonts.googleapis.com/css?family=Roboto&display=swap" rel=“stylesheet">
     {{ encore_entry_link_tags('app') }}
 {% endblock %}
 
 {% block body %}
-    {{ parent() }}
-    <h1>Back Office</h1>
-    <a class="btn btn-primary" href="/godata" role="button">Envoyer infos</a>
+    {% include 'nav.html.twig' %}
+    <div class="container">
+        <a class="btn btn-primary" href="/godata" role="button">Envoyer infos</a>
+    </div>
+    {% include 'footer.html.twig' %}
 {% endblock %}
 
 {% block javascripts %}
-    {{ parent() }}
+    {{ encore_entry_script_tags('app') }}
 {% endblock %}
-
-
-

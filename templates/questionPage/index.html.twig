@@ -3,7 +3,7 @@
 {% block title %}TEST{% endblock %}
 
 {% block stylesheets %}
-    {{ parent() }}
+    <link href="https://fonts.googleapis.com/css?family=Roboto&display=swap" rel=“stylesheet">
     {{ encore_entry_link_tags('app') }}
 {% endblock %}
 
@@ -44,7 +44,6 @@
 {% endblock %}
 
 {% block javascripts %}
-    {{ parent() }}
     <script>
         const url = new URL('http://mercure.mr486.com/.well-known/mercure');
         url.searchParams.append('topic', 'question');
