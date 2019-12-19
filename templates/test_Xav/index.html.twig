@@ -1,9 +1,7 @@
 {% extends 'base.html.twig' %}
 
 {% block stylesheets %}
-   <script src="https://kit.fontawesome.com/a7734cc269.js" crossorigin="anonymous"></script>
-
-
+    {{ parent() }}
 {% endblock %}
 
 {% block title %}Hello TestXavController!{% endblock %}
@@ -73,7 +71,7 @@
 {% endblock %}
 
 {% block javascripts %}
-
+    {{ parent() }}
     <script>
         const url = new URL('http://mercure.mr486.com/.well-known/mercure');
         url.searchParams.append('topic', 'question');
