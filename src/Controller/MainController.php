@@ -3,6 +3,7 @@
 namespace App\Controller;
 
 use App\Service\ApiGet;
+use App\Service\ReplaceDash;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
@@ -42,6 +43,7 @@ class MainController extends AbstractController
     public function question()
     {
         $apiGet = (new \App\Service\ApiGet)->getApi();
+        dump($apiGet);
         return $this->render('questionPage/index.html.twig', [
             'apians' => $apiGet
         ]);
