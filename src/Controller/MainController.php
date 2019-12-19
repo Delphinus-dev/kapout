@@ -8,11 +8,19 @@ use Symfony\Component\Routing\Annotation\Route;
 class MainController extends AbstractController
 {
     /**
-     * @Route("/", name="mainPage")
+     * @Route("/", name="newHomePage")
      */
     public function index()
     {
-        return $this->render('mainPage/mainPageIndex.html.twig');
+        return $this->render('newHomePage/index.html.twig');
+    }
+
+    /**
+     * @Route("/test", name="oldMainPage")
+     */
+    public function oldHomePage()
+    {
+        return $this->render('oldMainPage/index.html.twig');
     }
 
     /**
@@ -20,7 +28,6 @@ class MainController extends AbstractController
      */
     public function question()
     {
-        return $this->render('questionPage/questionPageIndex.html.twig');
+        return $this->render('questionPage/index.html.twig');
     }
-
 }

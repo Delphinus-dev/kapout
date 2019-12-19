@@ -2,16 +2,17 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <title>{% block title %}{% endblock %}</title>
-    {% block stylesheets %}
-        <link href="https://fonts.googleapis.com/css?family=Roboto&display=swap" rel=“stylesheet">
-    {% endblock %}
+    <title>
+{% block title %}
+{% endblock %}
+    </title>
+{% block stylesheets %}
+{% endblock %}
 </head>
 <body>
 {% block body %}
 {% endblock %}
 {% block javascripts %}
-    <script src="https://kit.fontawesome.com/2125d4e5b5.js" crossorigin="anonymous"></script>
 {% endblock %}
 </body>
 </html>
