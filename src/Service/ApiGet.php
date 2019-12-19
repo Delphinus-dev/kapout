@@ -1,48 +1,38 @@
 <?php
 
-namespace App\Controller;
 
-use http\Env\Request;
-use http\Env\Response;
-use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
+namespace App\Service;
+
+
 use Symfony\Component\HttpClient\HttpClient;
-use Symfony\Component\Routing\Annotation\Route;
+use Symfony\Component\HttpFoundation\Response;
 use Symfony\Contracts\HttpClient\Exception\ClientExceptionInterface;
 use Symfony\Contracts\HttpClient\Exception\DecodingExceptionInterface;
 use Symfony\Contracts\HttpClient\Exception\RedirectionExceptionInterface;
 use Symfony\Contracts\HttpClient\Exception\ServerExceptionInterface;
 use Symfony\Contracts\HttpClient\Exception\TransportExceptionInterface;
 
-class SuperHeroController extends AbstractController
+class ApiGet
 {
     const API_URL = 'https://superheroapi.com/api/2608451795899942/';
 
-    /**
-     * @Route("/super/hero", name="super_hero")
-     */
-    public function index()
-    {
-        return $this->render('super_hero/index.html.twig', [
-            'controller_name' => 'SuperHeroController',
-        ]);
-    }
 
     /**
-     * @Route("/super", name="super_api")
-     * @return \Symfony\Component\HttpFoundation\Response
+     * @param array $apiGet
+     * @return array
      * @throws ClientExceptionInterface
      * @throws DecodingExceptionInterface
      * @throws RedirectionExceptionInterface
      * @throws ServerExceptionInterface
      * @throws TransportExceptionInterface
      */
-    public function getApi(): \Symfony\Component\HttpFoundation\Response
+    public function getApi(): array
     {
         $id = range(1,731);
         shuffle($id);
-        dump($id[1]);
+
         $apiAns = [];
-        for ($i = 0; $i < 8; $i ++) {
+        for ($i = 1; $i < 8; $i ++) {
 
 
             $client = HttpClient::create();
@@ -63,12 +53,10 @@ class SuperHeroController extends AbstractController
                 $content = $response->toArray();
                 // convert the response (here in JSON) to an PHP array
                 array_push($apiAns, $content);
+                // array_rand(array($heroes), 1);
             }
         }
-            return $this->render('super_hero/index.html.twig',
-                [
-                    'content' => $content,
-                    'apians' => $apiAns
-                ]);
+
+        return $apiAns;
     }
 }
