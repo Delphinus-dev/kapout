@@ -12,7 +12,7 @@ class MainController extends AbstractController
      */
     public function index()
     {
-        return $this->render('mainPage/mainPageIndex.html.twig');
+        return $this->render('mainPage/index.html.twig');
     }
 
     /**
@@ -20,7 +20,14 @@ class MainController extends AbstractController
      */
     public function question()
     {
-        return $this->render('questionPage/questionPageIndex.html.twig');
+        return $this->render('questionPage/index.html.twig');
     }
 
+    /**
+     * @Route("/test", name="testPage")
+     */
+    public function test()
+    {
+        return $this->render('testPage/index.html.twig');
+    }
 }
