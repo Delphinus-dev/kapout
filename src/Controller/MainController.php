@@ -12,7 +12,7 @@ class MainController extends AbstractController
      */
     public function index()
     {
-        return $this->render('index.html.twig');
+        return $this->render('mainPage/index.html.twig');
     }
 
     /**
@@ -20,7 +20,7 @@ class MainController extends AbstractController
      */
     public function question()
     {
-        return $this->render('index.html.twig');
+        return $this->render('questionPage/index.html.twig');
     }
 
     /**
@@ -28,7 +28,7 @@ class MainController extends AbstractController
      */
     public function test()
     {
-        return $this->render('index.html.twig');
+        return $this->render('testPage/index.html.twig');
     }
 
     /**
@@ -36,6 +36,6 @@ class MainController extends AbstractController
      */
     public function backoffice()
     {
-        return $this->render('backOffice/index.html.twig');
+        return $this->render('backOfficePage/index.html.twig');
     }
 }
