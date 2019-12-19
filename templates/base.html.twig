@@ -1,17 +1,19 @@
 <!DOCTYPE html>
-<html>
-    <head>
-        <meta charset="UTF-8">
-        <title>{% block title %}Welcome!{% endblock %}</title>
-        {% block stylesheets %}
-        {% endblock %}
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>{% block title %}{% endblock %}</title>
+    {% block stylesheets %}
         {{ encore_entry_link_tags('app') }}
         <link href="https://fonts.googleapis.com/css?family=Roboto&display=swap" rel=“stylesheet">
-    </head>
-    <body>
-        {% block body %}
-        {% endblock %}
-        {% block javascripts %}
-        {% endblock %}
-    </body>
+    {% endblock %}
+</head>
+<body>
+{% block snowflakes %}{% endblock %}
+{% block body %}{% endblock %}
+{% block javascripts %}
+    {{ encore_entry_script_tags('app') }}
+    <script src="https://kit.fontawesome.com/2125d4e5b5.js" crossorigin="anonymous"></script>
+{% endblock %}
+</body>
 </html>
