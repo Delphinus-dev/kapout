@@ -30,12 +30,4 @@ class MainController extends AbstractController
     {
         return $this->render('testPage/index.html.twig');
     }
-
-    /**
-     * @Route("/backoffice", name="boPage")
-     */
-    public function backoffice()
-    {
-        return $this->render('backOfficePage/index.html.twig');
-    }
 }
