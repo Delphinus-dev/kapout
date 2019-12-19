@@ -18,14 +18,6 @@
         </div>
     </div>
         {{ dump(content) }}
-            {% for key,value in content %}
-                <p>{{ key }}</p>
-                <hr/>
-            {% endfor %}
-    {% if content.powerstats is iterable %}
-        {% for content in content.powerstats %}
-            Hello {{ content }}!
-        {% endfor %}
-    {% endif %}
+        {{ dump(apians) }}
 </div>
 {% endblock %}

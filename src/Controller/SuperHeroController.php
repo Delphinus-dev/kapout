@@ -28,8 +28,7 @@ class SuperHeroController extends AbstractController
     }
 
     /**
-     * @Route("/super/{id}", name="super_api")
-     * @param $id
+     * @Route("/super", name="super_api")
      * @return \Symfony\Component\HttpFoundation\Response
      * @throws ClientExceptionInterface
      * @throws DecodingExceptionInterface
@@ -37,36 +36,39 @@ class SuperHeroController extends AbstractController
      * @throws ServerExceptionInterface
      * @throws TransportExceptionInterface
      */
-    public function getApi($id): \Symfony\Component\HttpFoundation\Response
+    public function getApi(): \Symfony\Component\HttpFoundation\Response
     {
-        if ($id = 332 || $id = 346){
-            $id++;
-        }
-        $id = rand(1, 731);
+        $id = range(1,731);
+        shuffle($id);
+        dump($id[1]);
+        $apiAns = [];
+        for ($i = 0; $i < 8; $i ++) {
 
-        $client = HttpClient::create();
-        $response = $client->request('GET', "".self::API_URL."{$id}");
-        $statusCode = $response->getStatusCode();
-        // $statusCode = 200
-        $contentType = $response->getHeaders()['content-type'][0];
-        // $contentType = 'application/json'
-        $content = $response->getContent();
-        // $content = '{"id":521583, "name":"symfony-docs", ...}'
-        $content = $response->toArray();
-        // $content = ['id' => 521583, 'name' => 'symfony-docs', ...]
-        $statusCode = $response->getStatusCode(); // get Response status code 200
 
-        if ($statusCode === 200) {
+            $client = HttpClient::create();
+            $response = $client->request('GET', "" . self::API_URL . "$id[$i]");
+            $statusCode = $response->getStatusCode();
+            // $statusCode = 200
+            $contentType = $response->getHeaders()['content-type'][0];
+            // $contentType = 'application/json'
             $content = $response->getContent();
-            // get the response in JSON format
-
+            // $content = '{"id":521583, "name":"symfony-docs", ...}'
             $content = $response->toArray();
-            // convert the response (here in JSON) to an PHP array
-        }
+            // $content = ['id' => 521583, 'name' => 'symfony-docs', ...]
+            $statusCode = $response->getStatusCode(); // get Response status code 200
+            if ($statusCode === 200) {
+                $content = $response->getContent();
+                // get the response in JSON format
 
+                $content = $response->toArray();
+                // convert the response (here in JSON) to an PHP array
+                array_push($apiAns, $content);
+            }
+        }
             return $this->render('super_hero/index.html.twig',
                 [
-                    'content' => $content
+                    'content' => $content,
+                    'apians' => $apiAns
                 ]);
     }
 }
