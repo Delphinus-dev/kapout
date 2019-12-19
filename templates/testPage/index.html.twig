@@ -8,8 +8,9 @@
 {% endblock %}
 
 {% block body %}
-    {{ parent() }}
+    {% include 'nav.html.twig' %}
     <div id="scoreBoard"></div>
+    {% include 'footer.html.twig' %}
 {% endblock %}
 
 {% block javascripts %}
