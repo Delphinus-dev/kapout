@@ -73,7 +73,7 @@
 {% block javascripts %}
     {{ parent() }}
     <script>
-        const url = new URL('http://mercure.mr486.com/.well-known/mercure');
+        const url = new URL('https://mercure.mr486.com/.well-known/mercure');
         url.searchParams.append('topic', 'question');
         const eventSource = new EventSource(url);
         // eventSource.onmessage = e => console.log(e);
