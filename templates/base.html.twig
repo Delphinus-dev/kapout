@@ -1,18 +1,17 @@
 <!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <title>
-{% block title %}
-{% endblock %}
-    </title>
-{% block stylesheets %}
-{% endblock %}
-</head>
-<body>
-{% block body %}
-{% endblock %}
-{% block javascripts %}
-{% endblock %}
-</body>
+<html>
+    <head>
+        <meta charset="UTF-8">
+        <title>{% block title %}Welcome!{% endblock %}</title>
+        {% block stylesheets %}
+        {% endblock %}
+        {{ encore_entry_link_tags('app') }}
+        <link href="https://fonts.googleapis.com/css?family=Roboto&display=swap" rel=“stylesheet">
+    </head>
+    <body>
+        {% block body %}
+        {% endblock %}
+        {% block javascripts %}
+        {% endblock %}
+    </body>
 </html>

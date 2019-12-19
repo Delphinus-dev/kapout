@@ -1,8 +1,93 @@
 @import "vars";
 @import "~bootstrap/scss/bootstrap";
 
+
+
 .mainpage {
     background: url(/build/images/background.png);
-    color:$primary-color-red;
-    width: 100%;
 }
+
+body {
+  background-image: url(/build/images/background.png);
+  background-size: cover;
+  background-repeat: no-repeat;
+}
+
+
+#question {
+  color : $secondary-color-green;
+  text-align: center;
+}
+
+.nbAnswers {
+  color : #ffffff;
+}
+
+.rouge {
+
+  margin-bottom: 15px;
+  background-color: #9a000b;
+  color:#FFFFFF;
+}
+
+.verte {
+
+  margin-bottom: 15px;
+  background-color: $secondary-color-green;
+  color:#FFFFFF;
+}
+
+.blanche {
+
+  margin-bottom: 15px;
+  background-color: #00589a;
+  color:#FFFFFF;
+}
+
+.doree {
+
+  background-color: #614E1a;
+  color:#FFFFFF;
+}
+
+.card {
+  background-color: rgba(255,255,255, 0);
+  border: 0px;
+}
+
+i.fas {
+  margin-left: 5px;
+  color: #FFFFFF;
+}
+
+#reponseBlanche, #reponseDoree, #reponseRouge, #reponseVerte {
+  font-size: 1.5rem;
+  margin-top: 20px;
+}
+
+footer {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  height: 35px;
+  background-color: #1D2F04;
+  color: white;
+  display: flex;
+  justify-content: center;
+  align-content: center;
+}
+footer a {
+  color: #95EB14;
+}
+footer a:hover {
+  text-decoration: underline;
+}
+footer ul {
+  list-style: none;
+  display: flex;
+  justify-content: center;
+  align-content: center;
+}
+
+
