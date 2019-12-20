@@ -3,6 +3,8 @@
 
 namespace App\Controller;
 
+use App\Entity\Reponse;
+use App\Entity\User;
 use App\Service\ApiGet;
 use App\Entity\User;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
@@ -57,11 +59,18 @@ class BackOfficeController extends AbstractController
      */
     public function reponse()
     {
+        $bonneReponse  = $this->getDoctrine()
+        ->getRepository(Reponse::class)
+            ->findAll();
+        $maxA = max($bonneReponse);
+//        var_dump();
+//        var_dump($bonneReponse[max($bonneReponse)-1]['text']);
+
         define('PUBLIC_JWT', 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJtZXJjdXJlIjp7InB1Ymxpc2giOlsiKiJdfX0.NFCEbEEiI7zUxDU2Hj0YB71fQVT8YiQBGQWEyxWG0po');
         $postData = http_build_query([
             // On se place sur localhost:80, sur notre topic
             'topic' => 'reponse',
-            'data' => 'la réponse D',
+            'data' => $maxA->getText(),//'la réponse D',
         ]);
         $r = file_get_contents('https://mercure.mr486.com/.well-known/mercure', false, stream_context_create(['http' => [
             'method' => 'POST',
@@ -83,7 +92,12 @@ class BackOfficeController extends AbstractController
      */
     public function question()
     {
-        switch (9) {
+
+        $nbQuestions = $this->getDoctrine()
+            ->getRepository(Reponse::class)
+            ->countQuestions(231079);
+
+        switch ($nbQuestions) {
             // switch ($this->getQuestions()) {
             case 0 :
             case 1 :
@@ -95,7 +109,6 @@ class BackOfficeController extends AbstractController
 
                 $api = new ApiGet();
                 $indexApi = $api->randTab();
-                var_dump($indexApi);
                 break;
             case 7 :
                 // SantaClaus
@@ -117,8 +130,21 @@ class BackOfficeController extends AbstractController
         $indexAnswer = range(2, 5);
 
         shuffle($indexAnswer);
+        $newPos = array_search(5, $indexAnswer);
+
+
         // Insérer la bonne réponse dans la base de données
-        var_dump($indexAnswer[3]);
+        $entityManager = $this->getDoctrine()->getManager();
+
+        $question = new Reponse();
+        $question->setReponse($newPos);
+        $question->setPin(231079);
+        $question->setQuestion($nbQuestions+1);
+        $question->setText($indexApi[5]);
+
+        $entityManager->persist($question);
+        $entityManager->flush();
+
         $indexTab = [];
         array_push($indexTab, $indexApi[0]);
         array_push($indexTab, $indexApi[1]);
@@ -128,8 +154,6 @@ class BackOfficeController extends AbstractController
         array_push($indexTab, $indexApi[$indexAnswer[3]]);
         $time['timer'] = 20;
         array_push($indexTab, 20 );
-        var_dump($indexTab);
-        var_dump(json_encode($indexTab));
 
         define('PUBLIC_JWT', 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJtZXJjdXJlIjp7InB1Ymxpc2giOlsiKiJdfX0.NFCEbEEiI7zUxDU2Hj0YB71fQVT8YiQBGQWEyxWG0po');
         $postData = http_build_query([
