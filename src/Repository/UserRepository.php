@@ -47,4 +47,14 @@ class UserRepository extends ServiceEntityRepository
         ;
     }
     */
+
+    public function hallOfFame()
+        {
+            return $this
+                ->createQueryBuilder("u")
+                ->orderBy("u.score", "DESC")
+                ->setMaxResults(4)
+                ->getQuery()
+                ->getResult();
+        }
 }

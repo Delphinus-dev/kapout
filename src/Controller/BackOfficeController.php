@@ -3,6 +3,8 @@
 
 namespace App\Controller;
 
+
+use App\Repository\UserRepository;
 use App\Entity\Reponse;
 use App\Entity\User;
 use App\Service\ApiGet;
@@ -186,22 +188,16 @@ class BackOfficeController extends AbstractController
 
     /**
      * @Route("/hall", name="halloffame")
+     * @param UserRepository $userRepository
      * @return Response
      */
-    public function hall() : Response
+    public function hall(UserRepository $userRepository) : Response
     {
-        $score = new User();
-        if (!$score) {
-            throw $this->createNotFoundException(
-                'No score  found in user\'s table.'
-            );
-        }
-        $score =  $this ->getDoctrine()
-            ->getRepository(User::class)
-            ->findBy(['score'=>$score->getScore()], ['score'=>'DESC'], 3);
+        $score = $userRepository->hallOfFame();
+
 
         return $this->render('hall/index.html.twig',
-            ['score' => $score,
+            ['scores' => $score
             ]);
     }
 }
