@@ -1,0 +1,17 @@
+{% extends "base.html.twig" %}
+
+{% block title %}Affichage de la réponse{% endblock %}
+
+{% block stylesheets %}
+    <link href="https://fonts.googleapis.com/css?family=Roboto&display=swap" rel=“stylesheet">
+    {{ encore_entry_link_tags('app') }}
+{% endblock %}
+
+{% block body %}
+    <div class="container">
+        <form action="{{ path('question') }}" method="post">
+            <button type="submit" value="question">Question</button>
+        </form>
+    </div>
+
+{% endblock %}

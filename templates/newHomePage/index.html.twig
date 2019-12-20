@@ -3,97 +3,70 @@
 {% block title %}KAPOUT{% endblock %}
 
 {% block stylesheets %}
+    <link rel="stylesheet" type="text/css" href="{{ asset('mainpage.css') }}"/>
     <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.8.2/css/all.css">
     <link href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.3.1/css/bootstrap.min.css" rel="stylesheet">
     <link href="https://cdnjs.cloudflare.com/ajax/libs/mdbootstrap/4.10.1/css/mdb.min.css" rel="stylesheet">
 
+
+{% endblock %}
+
+{% block snowflakes %}
+
     <style>
-        html,
-        body,
-        header,
-        .view {
-            height: 100%;
+        /* customizable snowflake styling */
+        .snowflake {
+            color: #fff;
+            font-size: 1em;
+            font-family: Arial, sans-serif;
+            text-shadow: 0 0 5px #000;
         }
 
-        @media (max-width: 740px) {
-            html,
-            body,
-            header,
-            .view {
-                height: 1000px;
-            }
-        }
-        @media (min-width: 800px) and (max-width: 850px) {
-            html,
-            body,
-            header,
-            .view {
-                height: 650px;
-            }
-        }
-
-        .top-nav-collapse {
-            background-color: #3f51b5 !important;
-        }
-
-        .navbar:not(.top-nav-collapse) {
-            background: transparent !important;
-        }
-
-        @media (max-width: 991px) {
-            .navbar:not(.top-nav-collapse) {
-                background: #3f51b5 !important;
-            }
-        }
-
-        .rgba-gradient {
-            background: -webkit-linear-gradient(45deg, rgba(0, 0, 0, 0.7), rgba(72, 15, 144, 0.4) 100%);
-            background: -webkit-gradient(linear, 45deg, from(rgba(0, 0, 0, 0.7), rgba(72, 15, 144, 0.4) 100%));
-            background: linear-gradient(to 45deg, rgba(0, 0, 0, 0.7), rgba(72, 15, 144, 0.4) 100%);
-        }
-
-        .card {
-            background-color: rgba(126, 123, 215, 0.2);
-        }
-
-        .md-form label {
-            color: #ffffff;
-        }
-
-        h6 {
-            line-height: 1.7;
-        }
+        @-webkit-keyframes snowflakes-fall{0%{top:-10%}100%{top:100%}}@-webkit-keyframes snowflakes-shake{0%,100%{-webkit-transform:translateX(0);transform:translateX(0)}50%{-webkit-transform:translateX(80px);transform:translateX(80px)}}@keyframes snowflakes-fall{0%{top:-10%}100%{top:100%}}@keyframes snowflakes-shake{0%,100%{transform:translateX(0)}50%{transform:translateX(80px)}}.snowflake{position:fixed;top:-10%;z-index:9999;-webkit-user-select:none;-moz-user-select:none;-ms-user-select:none;user-select:none;cursor:default;-webkit-animation-name:snowflakes-fall,snowflakes-shake;-webkit-animation-duration:10s,3s;-webkit-animation-timing-function:linear,ease-in-out;-webkit-animation-iteration-count:infinite,infinite;-webkit-animation-play-state:running,running;animation-name:snowflakes-fall,snowflakes-shake;animation-duration:10s,3s;animation-timing-function:linear,ease-in-out;animation-iteration-count:infinite,infinite;animation-play-state:running,running}.snowflake:nth-of-type(0){left:1%;-webkit-animation-delay:0s,0s;animation-delay:0s,0s}.snowflake:nth-of-type(1){left:10%;-webkit-animation-delay:1s,1s;animation-delay:1s,1s}.snowflake:nth-of-type(2){left:20%;-webkit-animation-delay:6s,.5s;animation-delay:6s,.5s}.snowflake:nth-of-type(3){left:30%;-webkit-animation-delay:4s,2s;animation-delay:4s,2s}.snowflake:nth-of-type(4){left:40%;-webkit-animation-delay:2s,2s;animation-delay:2s,2s}.snowflake:nth-of-type(5){left:50%;-webkit-animation-delay:8s,3s;animation-delay:8s,3s}.snowflake:nth-of-type(6){left:60%;-webkit-animation-delay:6s,2s;animation-delay:6s,2s}.snowflake:nth-of-type(7){left:70%;-webkit-animation-delay:2.5s,1s;animation-delay:2.5s,1s}.snowflake:nth-of-type(8){left:80%;-webkit-animation-delay:1s,0s;animation-delay:1s,0s}.snowflake:nth-of-type(9){left:90%;-webkit-animation-delay:3s,1.5s;animation-delay:3s,1.5s}.snowflake:nth-of-type(10){left:25%;-webkit-animation-delay:2s,0s;animation-delay:2s,0s}.snowflake:nth-of-type(11){left:65%;-webkit-animation-delay:4s,2.5s;animation-delay:4s,2.5s}
     </style>
+    <div class="snowflakes" aria-hidden="true">
+        <div class="snowflake">
+            ❅
+        </div>
+        <div class="snowflake">
+            ❆
+        </div>
+        <div class="snowflake">
+            ❅
+        </div>
+        <div class="snowflake">
+            ❆
+        </div>
+        <div class="snowflake">
+            ❅
+        </div>
+        <div class="snowflake">
+            ❆
+        </div>
+        <div class="snowflake">
+            ❅
+        </div>
+        <div class="snowflake">
+            ❆
+        </div>
+        <div class="snowflake">
+            ❅
+        </div>
+        <div class="snowflake">
+            ❆
+        </div>
+        <div class="snowflake">
+            ❅
+        </div>
+        <div class="snowflake">
+            ❆
+        </div>
+    </div>
+
 {% endblock %}
 
 {% block body %}
     <header>
-        <nav class="navbar navbar-expand-lg navbar-dark fixed-top scrolling-navbar">
-            <div class="container">
-                <a class="navbar-brand" href="#">
-                    <strong>KAPOUT</strong>
-                </a>
-                <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent-7" aria-controls="navbarSupportedContent-7" aria-expanded="false" aria-label="Toggle navigation">
-                    <span class="navbar-toggler-icon"></span>
-                </button>
-                <div class="collapse navbar-collapse" id="navbarSupportedContent-7">
-                    <ul class="navbar-nav mr-auto">
-                        <li class="nav-item active">
-                            <a class="nav-link" href="/">Home
-                                <span class="sr-only">(current)</span>
-                            </a>
-                        </li>
-                        <li class="nav-item">
-                            <a class="nav-link" href="/questions">Questions</a>
-                        </li>
-                        <li class="nav-item">
-                            <a class="nav-link" href="/backoffice">BackOffice</a>
-                        </li>
-                    </ul>
-                </div>
-            </div>
-        </nav>
-
         <div class="view" style="background-image: url('/build/images/bg.jpg'); background-repeat: no-repeat; background-size: cover; background-position: center center;">
             <div class="mask rgba-gradient d-flex justify-content-center align-items-center">
                 <div class="container">
@@ -101,31 +74,28 @@
                         <div class="col-md-6 mb-5 mt-md-0 mt-5 white-text text-center text-md-left">
                             <h1 class="h1-responsive font-weight-bold wow fadeInLeft" data-wow-delay="0.3s">Sign up right now! </h1>
                             <hr class="hr-light wow fadeInLeft" data-wow-delay="0.3s">
-                            <h6 class="mb-3 wow fadeInLeft" data-wow-delay="0.3s">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Rem repellendus quasi fuga
-                                nesciunt dolorum nulla magnam veniam sapiente, fugiat! Commodi sequi non animi ea
-                                dolor molestiae, quisquam iste, maiores. Nulla.</h6>
-                            <a class="btn btn-outline-white wow fadeInLeft" data-wow-delay="0.3s" href="#">Learn more</a>
+                            <h3 class="mb-3 wow fadeInLeft" data-wow-delay="0.3s">Have fun with our's SUPERHEROES. <br> Come and Join Us on KAPOUT ! </h3>
                         </div>
                         <div class="col-md-6 col-xl-5 mb-4">
-                            <div class="card wow fadeInRight" data-wow-delay="0.3s">
+                            <div class="card2 wow fadeInRight " data-wow-delay="0.3s">
                                 <div class="card-body">
                                     <div class="text-center">
                                         <h3 class="white-text">
-                                            <i class="fas fa-user white-text"></i> Inscription:</h3>
+                                            <i class="fas fa-user white-text"></i>  Registration</h3>
                                         <hr class="hr-light">
                                     </div>
                                     <div class="md-form">
                                         <i class="fas fa-puzzle-piece prefix white-text active"></i>
                                         <input type="text" id="form3" class="white-text form-control">
-                                        <label for="form3" class="active">N° de Partie</label>
+                                        <label for="form3" class="active enter">Enter PIN</label>
                                     </div>
                                     <div class="md-form">
                                         <i class="fas fa-ghost prefix white-text active"></i>
                                         <input type="email" id="form2" class="white-text form-control">
-                                        <label for="form2" class="active">Votre Pseudo</label>
+                                        <label for="form2" class="active enter">Nickname</label>
                                     </div>
                                     <div class="text-center mt-4">
-                                        <button class="btn btn-indigo">Jouez</button>
+                                        <button class="btn btn-indigo">GO !</button>
                                     </div>
                                 </div>
                             </div>
@@ -139,11 +109,13 @@
         <div class="container">
             <div class="row py-5">
                 <div class="col-md-12 text-center">
-                    <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</p>
+                    <h3>Welcome to the KAPOUT team game, you are now in the world of KAPOUT 4.0.<br>
+                        We hope you will enjoy it.</h3>
                 </div>
             </div>
         </div>
     </main>
+    {% include 'footer.html.twig' %}
 {% endblock %}
 
 {% block javascripts %}

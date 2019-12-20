@@ -1,8 +1,138 @@
 @import "vars";
 @import "~bootstrap/scss/bootstrap";
 
+
 .mainpage {
     background: url(/build/images/background.png);
-    color:$primary-color-red;
-    width: 100%;
 }
+
+body {
+  background-image: url(/build/images/background.png);
+  background-size: cover;
+  background-repeat: no-repeat;
+}
+
+#texteAttente {
+  color: #FFFFFF;
+  font-size: 6em;
+  font-weight: 900;
+}
+
+#gameStart {
+  color: #FFFFFF;
+}
+
+.textACentrer {
+  top: 30%;
+  position: relative;
+}
+
+#cacheAtente {
+  height: 100%;
+  width: 100%;
+  background-color: #880000;
+  top: 0;
+  left: 0;
+  position: fixed;
+  z-index: 1000;
+}
+
+#question, #mission {
+  color : $secondary-color-green;
+  text-align: center;
+}
+
+  .nbAnswers {
+    color : $secondary-color-green;
+    font-size: 3rem;
+}
+
+.rouge {
+
+  margin-bottom: 15px;
+  background-color: #9a000b;
+  color:#FFFFFF;
+}
+
+.verte {
+
+  margin-bottom: 15px;
+  background-color: $secondary-color-green;
+  color:#FFFFFF;
+}
+
+.blanche {
+
+  margin-bottom: 15px;
+  background-color: #00589a;
+  color:#FFFFFF;
+}
+
+.doree {
+
+  background-color: #614E1a;
+  color:#FFFFFF;
+}
+
+.card {
+  background-color: rgba(255,255,255, 0);
+  border: 0px;
+}
+
+i.fas {
+  margin-left: 5px;
+  color: #FFFFFF;
+}
+
+#reponseBlanche, #reponseDoree, #reponseRouge, #reponseVerte {
+  font-size: 1.5rem;
+  margin-top: 20px;
+}
+
+.timer{
+  font-size: 3rem;
+}
+
+#timer_time {
+  font-weight: 900;
+  font-size: .7em;
+}
+footer {
+  height: 100px;
+  background-color: #1D2F04;
+  color: white;
+  padding-right: 30px;
+}
+
+footer a {
+  color: #95EB14;
+}
+
+footer a:hover {
+  text-decoration: none;
+  color: #fff;
+}
+
+footer ul {
+  list-style: none;
+  display: flex;
+  justify-content: space-between;
+  align-content: center;
+  flex-direction: row;
+  align-items: center;
+  padding-top: 10px;
+}
+
+footer li {
+  margin-top: 10px;
+}
+
+@media screen and (max-width: 640px) {
+
+  footer ul {
+    flex-direction: column;
+  }
+}
+
+
+

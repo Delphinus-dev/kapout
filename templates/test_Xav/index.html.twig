@@ -1,0 +1,170 @@
+{% extends 'base.html.twig' %}
+
+{% block stylesheets %}
+    {{ parent() }}
+{% endblock %}
+
+{% block title %}Question{% endblock %}
+
+{% block body %}
+   <div class="container">
+    <div id="cacheAtente" class="col-12 text-center align-content-center cacheAtente">
+            <div class="textACentrer">
+                <div id="gameStart">Game starts in </div>
+                <div id="texteAttente" ></div>
+            </div>
+        </div>
+    </div>
+    <div class="container align-content-center">
+        <div class="col-12">
+            <h1 class="question my-4" id="mission">Find the false claim</h1>
+        </div>
+        <div class="col-12 row justify-content-between">
+            <div class="timer col-3" id="timer">
+                <div>Timer</div>
+                <div id="timer_time"></div>
+            </div>
+            <div class="card col-3 rounded" style="width: 18rem;">
+                <img class="card-img-top" id="image" src="https://www.superherodb.com/pictures2/portraits/10/100/1496.jpg" alt="Mon super héros">
+            </div>
+            <div class="nbAnswers column col-3">
+                <div id="nbReponses">0</div>
+            </div>
+            <div class="col-12">
+                <h1 class="question my-4" id="question">Super heros's name</h1>
+            </div>
+        </div>
+        <div class="card-deck">
+            <div class="card row">
+                <div class="card-body">
+                    <div class="rouge row rounded" onclick="answer(1)">
+                        <div class="col-md-4">
+                            <i class="fas fa-snowman my-2 col-md-6" style="font-size: 6em"></i>
+                        </div>
+                        <div class="col-md-8" id="reponseRouge">
+                            <span id="reponseRougespan"></span>
+                            </div>
+                    </div>
+                    <div class="verte row rounded" onclick="answer(2)">
+                        <div class="col-md-4">
+                             <i class="fas fa-holly-berry my-2" style="font-size: 6em"></i>
+                        </div>
+                        <div class="col-md-8" id="reponseVerte">
+                            <span id="reponseVertespan"></span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="card row">
+                <div class="card-body">
+                    <div class="blanche row rounded" onclick="answer(3)">
+                        <div class="col-md-4">
+                            <i class="fas fa-candy-cane my-2 col-md-6" style="font-size: 6em"></i>
+                        </div>
+                        <div class="col-md-8" id="reponseBlanche">
+                            <span id="reponseBlanchespan"></span>
+                        </div>
+                    </div>
+                    <div class="doree row rounded" onclick="answer(4)">
+                        <div class="col-md-4">
+                            <i class="fas fa-snowflake my-2" style="font-size: 6em"></i>
+                        </div>
+                        <div class="col-md-8" id="reponseDoree">
+                            <span id="reponseDoreespan"></span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+   </div>
+    {% include 'footer.html.twig' %}
+{% endblock %}
+
+{% block javascripts %}
+    {{ parent() }}
+    <script>
+        const url = new URL('https://mercure.mr486.com/.well-known/mercure');
+        url.searchParams.append('topic', 'question');
+        const eventSource = new EventSource(url);
+        // eventSource.onmessage = e => console.log(e);
+        eventSource.onmessage = e => {
+            document.getElementById('cacheAtente').style.backgroundColor = "#006622";
+            document.getElementById('timer_time').style.color = "#000"
+            document.getElementById('timer_time').style.fontSize = "80px"
+            const obj = JSON.parse(e.data);
+            document.title = obj['titre'];
+            document.getElementById('question').innerHTML = obj[0];
+            document.getElementById('nbReponses').innerHTML = "";
+            document.getElementById('image').setAttribute("src", obj[1]);
+
+            document.getElementById('reponseRougespan').innerHTML = obj[2]
+            document.getElementById('reponseVertespan').innerHTML = obj[3]
+            document.getElementById('reponseBlanchespan').innerHTML = obj[4]
+            document.getElementById('reponseDoreespan').innerHTML = obj[5]
+
+            document.getElementById('texteAttente').innerHTML = 3
+            document.getElementById('gameStart').innerHTML = "Game starts in"
+            let intervalId = setInterval(function () {
+                let predecompte = Number(document.getElementById('texteAttente').innerHTML);
+                if (predecompte > 0) {
+                    predecompte = predecompte - 1;
+                    document.getElementById('texteAttente').innerHTML = predecompte;
+                } else {
+                    // cache le div de masquage de la page
+                    document.getElementById('cacheAtente').style.opacity = 0;
+                    document.getElementById('cacheAtente').style.display = "none";
+                    document.getElementById('texteAttente').innerHTML = "";
+                    document.getElementById('timer_time').innerHTML = obj[6];
+                    clearInterval(intervalId);
+                    timer();
+                }
+            }, 1000);
+        };
+        const url2 = new URL('https://mercure.mr486.com/.well-known/mercure');
+        url2.searchParams.append('topic', 'reponse');
+        const eventSource2 = new EventSource(url2);
+        eventSource2.onmessage = e => {
+            document.getElementById('gameStart').innerHTML = "La bonne réponse était "
+            document.getElementById('texteAttente').innerHTML =  e.data
+        }
+            function timer () {
+            // alert(decompte);
+            var tempsRestant = setInterval(function () {
+                let decompte = Number(document.getElementById('timer_time').innerHTML);
+                if (decompte > 0) {
+                    decompte = decompte - 0.1;
+                    document.getElementById('timer_time').innerHTML = decompte.toFixed(1);
+                    if (decompte <= 3 && decompte > 2 ) {
+                        document.getElementById('timer_time').style.color = "#4444FF"
+                        document.getElementById('timer_time').style.fontSize = "100px"
+                    } else if (decompte <= 2 && decompte > 1 ) {
+                        document.getElementById('timer_time').style.color = "#FF8800"
+                        document.getElementById('timer_time').style.fontSize = "120px"
+                    } else if (decompte <= 1 ) {
+                        document.getElementById('timer_time').style.color = "#FF0000"
+                        document.getElementById('timer_time').style.fontSize = "150px"
+                    }
+                } else {
+                    // cache le div de masquage de la page
+                    document.getElementById('cacheAtente').style.display = "block";
+                    document.getElementById('cacheAtente').style.opacity = 1;
+                    document.getElementById('gameStart').innerHTML = ""
+                    document.getElementById('texteAttente').innerHTML = "TOO LATE !"
+                    document.getElementById('cacheAtente').style.backgroundColor = '#880000'
+                    clearInterval(tempsRestant);
+                }
+            }, 100);
+        }
+
+        function answer($id) {
+            document.getElementById('gameStart').innerHTML = ""
+            document.getElementById('texteAttente').innerHTML = "Wait for the others…"
+            document.getElementById('cacheAtente').style.backgroundColor = '#4466CC'
+            document.getElementById('cacheAtente').style.display = "block";
+            document.getElementById('cacheAtente').style.opacity = 1;
+            document.getElementById('timer_time').innerHTML = 9000;
+
+        }
+    </script>
+{% endblock %}
+

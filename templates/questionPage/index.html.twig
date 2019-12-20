@@ -8,44 +8,18 @@
 {% endblock %}
 
 {% block body %}
-    {% include 'nav.html.twig' %}
     <div class="container align-content-center">
-        <div class="col-12">
-            <h1 class="question my-4" id="question"></h1>
-        </div>
-        <div class="col-12 row justify-content-around">
-            <div class="timer" id="timer">
-                Truc qui donne le temps restant
-            </div>
-            <div class="text-center">
-                <img class="avatar image" id="image" src="https://www.superherodb.com/pictures2/portraits/10/100/1496.jpg" height="50%">
-            </div>
-            <div class="nbAnswers column">
-                <div>Réponses reçues</div>
-                <div id="nbReponses"></div>
-            </div>
-        </div>
-        <div class="reponses column">
-            <div class="col-12 justify-content-around row">
-                <div class="card bg-primary text-white rouge col-6 row" id="reponseRouge"><i class="fas fa-sleigh my-2" style="font-size: 6em;"></i></div>
-                <div class="card bg-primary text-white vert col-6 row" id="reponseVerte"><i class="fas fa-holly-berry my-2" style="font-size: 6em;"></i></div>
-            </div>
-            <div class="col-12 justify-content-around row">
-                <div class="card bg-primary text-white blanc col-6 row" id="reponseBlanche"><i class="fas fa-gifts my-2" style="font-size: 6em;"></i>d</div>
-                <div class="card bg-primary text-white dore col-6 row" id="reponseDoree"><i class="fas fa-candy-cane my-2" style="font-size: 6em;"></i>e</div>
-            </div>
-            <div class="col-12 justify-content-around row">
-                <div class="card bg-primary text-white vert col-6 row" id="reponseBlanche"><i class="fas fa-snowman my-2" style="font-size: 6em;"></i>c</div>
-                <div class="card bg-primary text-white dore col-6 row" id="reponseDoree"><i class="fas fa-snowflake my-2" style="font-size: 6em;"></i>f</div>
-            </div>
-        </div>
+        <form method="post" action="{{ path('reponse') }}">
+            <input type="hidden">
+            <button type="submit" value="reponse">Afficher Réponse</button>
+        </form>
     </div>
     {% include 'footer.html.twig' %}
 {% endblock %}
 
 {% block javascripts %}
     <script>
-        const url = new URL('http://mercure.mr486.com/.well-known/mercure');
+        const url = new URL('https://mercure.mr486.com/.well-known/mercure');
         url.searchParams.append('topic', 'question');
         const eventSource = new EventSource(url);
         // eventSource.onmessage = e => console.log(e);

@@ -32,7 +32,8 @@ Encore
 
     // will require an extra script tag for runtime.js
     // but, you probably want this, unless you're building a single-page app
-    .enableSingleRuntimeChunk()
+    //.enableSingleRuntimeChunk()
+    .disableSingleRuntimeChunk()
 
     /*
      * FEATURE CONFIG
@@ -55,7 +56,6 @@ Encore
 
     // enables Sass/SCSS support
     .enableSassLoader()
-
     .copyFiles({
         from: './assets/images',
         to: 'images/[path][name].[ext]',

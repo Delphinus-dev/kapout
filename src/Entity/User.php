@@ -21,6 +21,11 @@ class User
      */
     private $login;
 
+    /**
+     * @ORM\Column(type="integer", nullable=true)
+     */
+    private $score;
+
     public function getId(): ?int
     {
         return $this->id;
@@ -34,6 +39,18 @@ class User
     public function setLogin(string $login): self
     {
         $this->login = $login;
+
+        return $this;
+    }
+
+    public function getScore(): ?int
+    {
+        return $this->score;
+    }
+
+    public function setScore(?int $score): self
+    {
+        $this->score = $score;
 
         return $this;
     }
