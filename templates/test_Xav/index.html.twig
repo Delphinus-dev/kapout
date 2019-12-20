@@ -134,13 +134,13 @@
                 if (decompte > 0) {
                     decompte = decompte - 0.1;
                     document.getElementById('timer_time').innerHTML = decompte.toFixed(1);
-                    if (decompte <= 3 && decompte > 2 ) {
+                    if (decompte <= 5 && decompte > 3 ) {
                         document.getElementById('timer_time').style.color = "#4444FF"
                         document.getElementById('timer_time').style.fontSize = "100px"
-                    } else if (decompte <= 2 && decompte > 1 ) {
+                    } else if (decompte <= 3 && decompte > 1.5 ) {
                         document.getElementById('timer_time').style.color = "#FF8800"
                         document.getElementById('timer_time').style.fontSize = "120px"
-                    } else if (decompte <= 1 ) {
+                    } else if (decompte <= 1.5 ) {
                         document.getElementById('timer_time').style.color = "#FF0000"
                         document.getElementById('timer_time').style.fontSize = "150px"
                     }
@@ -156,14 +156,34 @@
             }, 100);
         }
 
-        function answer($id) {
+        function answer($answer) {
             document.getElementById('gameStart').innerHTML = ""
             document.getElementById('texteAttente').innerHTML = "Wait for the others…"
             document.getElementById('cacheAtente').style.backgroundColor = '#4466CC'
             document.getElementById('cacheAtente').style.display = "block";
             document.getElementById('cacheAtente').style.opacity = 1;
+            $temps = document.getElementById('timer_time').innerHTML*100
+            console.log($temps)
+            $idtemp = location.search
+            $id = Math.round(parseInt($idtemp.replace(/[^\d]/g, "")))
+           $reponse = "http://localhost:8000/responseHandler/" + $id +"/231079/"+ $answer + "/" + $temps
+           // $reponse = "https://kapout.mr486.com/responseHandler/" + $id +"/231079/"+ $answer + "/" + $temps
+            // console.log($reponse)
+            var xhr = new XMLHttpRequest();
+            xhr.open('GET', $reponse);
+            xhr.send(null);
+            // xhr.open('GET', 'https://kapout.mr486.com/responseHandler/1/231079/0/1234');
             document.getElementById('timer_time').innerHTML = 9000;
+        }
 
+        function extractUrlParams () {
+            var t = location.search.substring(1).split('&');
+            var f = [];
+            for (var i=0; i<t.length; i++) {
+                var x = t[ i ].split('=');
+                f[x[0]]=f[1];
+            }
+            return f;
         }
     </script>
 {% endblock %}

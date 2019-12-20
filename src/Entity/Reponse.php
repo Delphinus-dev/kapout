@@ -32,6 +32,11 @@ class Reponse
      */
     private $text;
 
+    /**
+     * @ORM\Column(type="integer")
+     */
+    private $Pin;
+
 
     public function getId(): ?int
     {
@@ -71,6 +76,18 @@ class Reponse
     public function setText(string $text): self
     {
         $this->text = $text;
+
+        return $this;
+    }
+
+    public function getPin(): ?int
+    {
+        return $this->Pin;
+    }
+
+    public function setPin(int $Pin): self
+    {
+        $this->Pin = $Pin;
 
         return $this;
     }
