@@ -27,10 +27,12 @@ class RegistrationType extends AbstractType
                     'label' => 'login',
                     'attr'=>['placeholder'=>'Nickname'],
                     'constraints' => [
-                        new NotEqualTo('ComteDeX'),
-                        new NotEqualTo('Comte De X'),
-                        new NotEqualTo('Comte-De-X'),
-                        new NotEqualTo('Comte_De_X'),
+                        new NotEqualTo('comtedex'),
+                        new NotEqualTo('comte de x'),
+                        new NotEqualTo('comtede x'),
+                        new NotEqualTo('comte dex'),
+                        new NotEqualTo('comte-de-x'),
+                        new NotEqualTo('comte_de_x'),
                         new NotBlank(),
                         new Length(['min' => 5,'max'=>255]),
                     ]
