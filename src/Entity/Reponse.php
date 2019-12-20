@@ -26,10 +26,12 @@ class Reponse
      */
     private $reponse;
 
+
     /**
      * @ORM\Column(type="text")
      */
     private $text;
+
 
     public function getId(): ?int
     {
@@ -60,6 +62,7 @@ class Reponse
         return $this;
     }
 
+
     public function getText(): ?string
     {
         return $this->text;
@@ -71,4 +74,5 @@ class Reponse
 
         return $this;
     }
+
 }
