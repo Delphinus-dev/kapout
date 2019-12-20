@@ -28,6 +28,9 @@ class RegistrationType extends AbstractType
                     'attr'=>['placeholder'=>'Nickname'],
                     'constraints' => [
                         new NotEqualTo('ComteDeX'),
+                        new NotEqualTo('Comte De X'),
+                        new NotEqualTo('Comte-De-X'),
+                        new NotEqualTo('Comte_De_X'),
                         new NotBlank(),
                         new Length(['min' => 5,'max'=>255]),
                     ]
