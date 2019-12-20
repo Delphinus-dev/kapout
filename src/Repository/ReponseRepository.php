@@ -19,6 +19,39 @@ class ReponseRepository extends ServiceEntityRepository
         parent::__construct($registry, Reponse::class);
     }
 
+    /**
+     * Repository method for finding the newest inserted
+     * entry inside the database. Will return the latest
+     * entry when one is existent, otherwise will return
+     * null.
+     *
+     * @return Reponse|null
+     * @throws \Doctrine\ORM\NonUniqueResultException
+     */
+    public function findLastInserted()
+    {
+        return $this
+            ->createQueryBuilder("r")
+            ->orderBy("r.id", "DESC")
+            ->setMaxResults(1)
+            ->getQuery()
+            ->getOneOrNullResult();
+    }
+
+    /*
+    public function getLastQuestion(Reponse $reponse) {
+        return $this->createQueryBuilder('r')
+            ->andWhere('r.question = :id')
+            ->setParameter('id', $id)
+            ->orderBy('r.id', 'DESC')
+            ->setMaxResults(1)
+            ->getQuery()
+            ->getResult()
+            ;
+        // equivalent de "SELECT question FROM reponse ORDER BY Id DESC LIMIT 0,1"
+    }
+    */
+
     // /**
     //  * @return Reponse[] Returns an array of Reponse objects
     //  */
