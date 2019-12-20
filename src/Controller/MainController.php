@@ -28,7 +28,7 @@ class MainController extends AbstractController
         $users = new User();
         $form = $this->createForm(RegistrationType::class, $users);
         $form->handleRequest($request);
-        if ($form->isSubmitted() && $form->isValid() && $form){
+        if ($form->isSubmitted() && $form->isValid()){
             $entityManager = $this->getDoctrine()->getManager();
             $entityManager->persist($users);
             $entityManager->flush();
