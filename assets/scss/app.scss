@@ -42,9 +42,9 @@ body {
   text-align: center;
 }
 
-  .nbAnswers {
-    color : $secondary-color-green;
-    font-size: 3rem;
+.nbAnswers {
+  color : $secondary-color-green;
+  font-size: 3rem;
 }
 
 .rouge {
@@ -72,6 +72,13 @@ body {
 
   background-color: #614E1a;
   color:#FFFFFF;
+}
+
+.rouge,
+.verte,
+.blanche,
+.doree {
+  cursor: pointer;
 }
 
 .card {
@@ -125,6 +132,65 @@ footer ul {
 
 footer li {
   margin-top: 10px;
+}
+
+
+.couronne{
+  text-align: center;
+}
+
+#podium-box {
+  width: 100%;
+  margin: 0 auto;
+}
+
+.podium-number {
+  font-weight: bold;
+  font-size: 8em;
+  color: white;
+}
+
+.step-container {
+  width: 100%;
+  position: relative;
+  text-align: center;
+}
+
+.step {
+  width: 100%;
+  position: absolute;
+  bottom: 0;
+}
+
+.bg-blue {
+  background-color: #063b65;
+}
+
+#first-step {
+  height: 80%;
+  background-color: #614E1a;
+}
+
+#second-step {
+  height: 50%;
+  background-color: $secondary-color-green;
+}
+
+#third-step {
+  height: 35%;
+  background-color: $primary-color-red;
+}
+
+.centerBoth {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.fa-crown{
+  color: #614E1a;
+  font-size: 10em;
+
 }
 
 @media screen and (max-width: 640px) {
