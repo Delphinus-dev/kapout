@@ -3,7 +3,6 @@
 namespace App\Controller;
 
 use App\Service\ApiGet;
-use App\Service\ReplaceDash;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
@@ -42,40 +41,24 @@ class MainController extends AbstractController
      */
     public function question()
     {
-        $apiGet = (new \App\Service\ApiGet)->getApi();
-        dump($apiGet);
-        $i = 0;
-            foreach ($apiGet as $key => $value){
-                $getQuestion[$i]['fullname'] = $apiGet[$key]['biography']['full-name'];
-                $getQuestion[$i]['gender'] = $apiGet[$key]['appearance']['gender'];
-                $getQuestion[$i]['alignment'] = $apiGet[$key]['biography']['alignment'];
-                $getQuestion[$i]['race'] = $apiGet[$key]['appearance']['race'];
-                $getQuestion[$i]['eye-color'] = $apiGet[$key]['appearance']['eye-color'];
-                $getQuestion[$i]['base'] = $apiGet[$key]['work']['base'];
-                $getQuestion[$i]['occupation'] = $apiGet[$key]['work']['occupation'];
-                $getQuestion[$i]['publisher'] = $apiGet[$key]['biography']['publisher'];
-                    foreach ($getQuestion[$i] as $k2 => $v2) {
-                        if (
-                            $v2 == 'null' ||
-                            $v2 == "-" ||
-                            $v2 == "") {
+        $api = new ApiGet();
+        $indexApi = $api->randTab();
+        var_dump($indexApi);
+        $indexAnswer = range(2,5);
 
-                            unset($getQuestion[$i][$k2]);
-                        }
-                    }
-                $i++;
-            json_encode($getQuestion, JSON_FORCE_OBJECT);
-            }
-        // foreach pour faire sauter les entrées vides
-        // foreach shufflisation des données par personne
-        // récupération des 3 réponses justes
-        // grâce aux clefs tu prépares la question
-        // recolle tout ça dans un tableau dans le bon sens par rapport aux besoins d'Amca
-        // json_encode
+        shuffle($indexAnswer);
+        // Insérer la bonne réponse dans la base de données
+        var_dump($indexAnswer[3]);
+        $indexTab = [];
+        array_push($indexTab, $indexApi[0]);
+        array_push($indexTab, $indexApi[1]);
+        array_push($indexTab, $indexApi[$indexAnswer[0]]);
+        array_push($indexTab, $indexApi[$indexAnswer[1]]);
+        array_push($indexTab, $indexApi[$indexAnswer[2]]);
+        array_push($indexTab, $indexApi[$indexAnswer[3]]);
+        var_dump($indexTab);
 
-         var_dump($getQuestion);
-        return $this->render('questionPage/index.html.twig', [
-            'apians' => $apiGet
-        ]);
+
+        return $this->render('questionPage/index.html.twig');
     }
 }
