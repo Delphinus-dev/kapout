@@ -38,6 +38,14 @@ class ReponseRepository extends ServiceEntityRepository
             ->getOneOrNullResult();
     }
 
+    public function countQuestions(int $pin)
+    {
+        return $this->createQueryBuilder('r')
+            ->select('COUNT(r)')
+            ->where('r.Pin = :pin')
+            ->setParameter('pin', $pin)
+            ->getQuery()->getSingleScalarResult();
+    }
     /*
     public function getLastQuestion(Reponse $reponse) {
         return $this->createQueryBuilder('r')

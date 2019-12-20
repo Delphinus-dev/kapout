@@ -3,6 +3,7 @@
 
 namespace App\Controller;
 
+use App\Entity\Reponse;
 use App\Service\ApiGet;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Response;
@@ -94,7 +95,6 @@ class BackOfficeController extends AbstractController
 
                 $api = new ApiGet();
                 $indexApi = $api->randTab();
-                var_dump($indexApi);
                 break;
             case 7 :
                 // SantaClaus
@@ -116,8 +116,24 @@ class BackOfficeController extends AbstractController
         $indexAnswer = range(2, 5);
 
         shuffle($indexAnswer);
+        $newPos = array_search(5, $indexAnswer);
+
+        $nbQuestions = $this->getDoctrine()
+            ->getRepository(Reponse::class)
+            ->countQuestions(231079);
+
         // Insérer la bonne réponse dans la base de données
-        var_dump($indexAnswer[3]);
+        $entityManager = $this->getDoctrine()->getManager();
+
+        $question = new Reponse();
+        $question->setReponse($newPos);
+        $question->setPin(231079);
+        $question->setQuestion($nbQuestions+1);
+        $question->setText($indexApi[5]);
+
+        $entityManager->persist($question);
+        $entityManager->flush();
+
         $indexTab = [];
         array_push($indexTab, $indexApi[0]);
         array_push($indexTab, $indexApi[1]);
@@ -127,8 +143,6 @@ class BackOfficeController extends AbstractController
         array_push($indexTab, $indexApi[$indexAnswer[3]]);
         $time['timer'] = 20;
         array_push($indexTab, 20 );
-        var_dump($indexTab);
-        var_dump(json_encode($indexTab));
 
         define('PUBLIC_JWT', 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJtZXJjdXJlIjp7InB1Ymxpc2giOlsiKiJdfX0.NFCEbEEiI7zUxDU2Hj0YB71fQVT8YiQBGQWEyxWG0po');
         $postData = http_build_query([
