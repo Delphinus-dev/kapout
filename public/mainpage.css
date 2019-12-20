@@ -58,9 +58,7 @@ footer {
     height: 100px;
     background-color: #1D2F04;
     color: white;
-    display: flex;
-    justify-content: center;
-    align-content: center;
+    padding-right: 30px;
 }
 
 footer a {

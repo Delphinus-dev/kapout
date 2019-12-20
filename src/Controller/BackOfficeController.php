@@ -52,7 +52,27 @@ class BackOfficeController extends AbstractController
     }
 
     /**
-     * @Route("/questions", name="questionPage")
+     * @Route("/reponse", name="reponse")
+     */
+    public function reponse()
+    {
+        define('PUBLIC_JWT', 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJtZXJjdXJlIjp7InB1Ymxpc2giOlsiKiJdfX0.NFCEbEEiI7zUxDU2Hj0YB71fQVT8YiQBGQWEyxWG0po');
+        $postData = http_build_query([
+            // On se place sur localhost:80, sur notre topic
+            'topic' => 'reponse',
+            'data' => 'la réponse D',
+        ]);
+        $r = file_get_contents('https://mercure.mr486.com/.well-known/mercure', false, stream_context_create(['http' => [
+            'method' => 'POST',
+            'header' => "Content-type: application/x-www-form-urlencoded\r\nAuthorization: Bearer " . PUBLIC_JWT,
+            'content' => $postData,
+        ]]));
+
+        return $this->render('questionPage/reponse.html.twig');
+    }
+
+    /**
+     * @Route("/questions", name="question")
      * @return Response
      * @throws ClientExceptionInterface
      * @throws DecodingExceptionInterface

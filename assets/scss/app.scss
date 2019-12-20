@@ -37,7 +37,7 @@ body {
   z-index: 1000;
 }
 
-#question {
+#question, #mission {
   color : $secondary-color-green;
   text-align: center;
 }
@@ -93,12 +93,15 @@ i.fas {
   font-size: 3rem;
 }
 
+#timer_time {
+  font-weight: 900;
+  font-size: .7em;
+}
 footer {
+  height: 100px;
   background-color: #1D2F04;
   color: white;
-  display: flex;
-  justify-content: center;
-  align-content: center;
+  padding-right: 30px;
 }
 
 footer a {
@@ -106,15 +109,22 @@ footer a {
 }
 
 footer a:hover {
-  text-decoration: underline;
+  text-decoration: none;
+  color: #fff;
 }
 
 footer ul {
   list-style: none;
   display: flex;
-  justify-content: center;
+  justify-content: space-between;
   align-content: center;
   flex-direction: row;
+  align-items: center;
+  padding-top: 10px;
+}
+
+footer li {
+  margin-top: 10px;
 }
 
 @media screen and (max-width: 640px) {
