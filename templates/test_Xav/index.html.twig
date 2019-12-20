@@ -4,24 +4,34 @@
     {{ parent() }}
 {% endblock %}
 
-{% block title %}Hello TestXavController!{% endblock %}
+{% block title %}Question{% endblock %}
 
 {% block body %}
+   <div class="container">
+    <div id="cacheAtente" class="col-12 text-center align-content-center cacheAtente">
+            <div class="textACentrer">
+                <div id="gameStart">Game starts in </div>
+                <div id="texteAttente" ></div>
+            </div>
+        </div>
+    </div>
     <div class="container align-content-center">
         <div class="col-12">
-            <h1 class="question my-4" id="question">ICI TEXTE DE LA QUESTION</h1>
+            <h1 class="question my-4" id="question">what's the false claim</h1>
         </div>
         <div class="col-12 row justify-content-around">
             <div class="timer" id="timer">
-                <div>Truc qui donne le temps restant</div>
+                <div>Timer</div>
                 <div id="timer_time"></div>
             </div>
             <div class="card" style="width: 18rem;">
                 <img class="card-img-top" id="image" src="https://www.superherodb.com/pictures2/portraits/10/100/1496.jpg" alt="Mon super héros">
             </div>
             <div class="nbAnswers column">
-                <div>Réponses reçues</div>
-                <div id="nbReponses"></div>
+                <div id="nbReponses">0</div>
+            </div>
+            <div class="col-12">
+                <h1 class="question my-4" id="question">Super heros's name</h1>
             </div>
         </div>
         <div class="card-deck">
@@ -66,7 +76,7 @@
                 </div>
             </div>
         </div>
-    </div>
+   </div>
     {% include 'footer.html.twig' %}
 {% endblock %}
 
@@ -78,29 +88,74 @@
         const eventSource = new EventSource(url);
         // eventSource.onmessage = e => console.log(e);
         eventSource.onmessage = e => {
-
+            document.getElementById('cacheAtente').style.backgroundColor = "#006622";
+            document.getElementById('timer_time').style.fontSize = "80px"
             const obj = JSON.parse(e.data);
-
-            document.getElementById('question').innerHTML = obj['question'];
-            document.getElementById('nbReponses').innerHTML = obj['nbReponses'];
-            document.getElementById('image').setAttribute("src", obj['image']);
-            document.getElementById('timer').innerHTML = obj['timer'];
-
+            document.title = obj['titre'];
+            document.getElementById('question').innerHTML = obj[0];
+            document.getElementById('nbReponses').innerHTML = "";
+            document.getElementById('image').setAttribute("src", obj[1]);
             let p = document.createElement("span");
-            p.innerHTML = obj['reponseRouge'];
+            p.innerHTML = obj[2];
             document.getElementById('reponseRouge').appendChild(p);
-
             p = document.createElement("span");
-            p.innerHTML = obj['reponseVerte'];
+            p.innerHTML = obj[3];
             document.getElementById('reponseVerte').appendChild(p);
-
             p = document.createElement("span");
-            p.innerHTML = obj['reponseBlanche'];
+            p.innerHTML = obj[4];
             document.getElementById('reponseBlanche').appendChild(p);
-
             p = document.createElement("span");
-            p.innerHTML = obj['reponseDoree'];
+            p.innerHTML = obj[5];
             document.getElementById('reponseDoree').appendChild(p);
+            document.getElementById('texteAttente').innerHTML = 3
+            document.getElementById('gameStart').innerHTML = "Game starts in"
+            let intervalId = setInterval(function () {
+                let predecompte = Number(document.getElementById('texteAttente').innerHTML);
+                if (predecompte > 0) {
+                    predecompte = predecompte - 1;
+                    document.getElementById('texteAttente').innerHTML = predecompte;
+                } else {
+                    // cache le div de masquage de la page
+                    document.getElementById('cacheAtente').style.opacity = 0;
+                    document.getElementById('texteAttente').innerHTML = "";
+                    document.getElementById('timer_time').innerHTML = obj[6];
+                    clearInterval(intervalId);
+                    timer();
+                }
+            }, 1000);
+        };
+        const url2 = new URL('https://mercure.mr486.com/.well-known/mercure');
+        url2.searchParams.append('topic', 'reponses');
+        const eventSource2 = new EventSource(url2);
+        eventSource2.onmessage = e2 => {
+            document.getElementById('nbReponses').innerHTML = e2.data;
+        };
+        function timer () {
+            // alert(decompte);
+            var tempsRestant = setInterval(function () {
+                let decompte = Number(document.getElementById('timer_time').innerHTML);
+                if (decompte > 0) {
+                    decompte = decompte - 0.1;
+                    document.getElementById('timer_time').innerHTML = decompte.toFixed(1);
+                    if (decompte <= 3 && decompte > 2 ) {
+                        document.getElementById('timer_time').style.color = "#4444FF"
+                        document.getElementById('timer_time').style.fontSize = "100px"
+                    } else if (decompte <= 2 && decompte > 1 ) {
+                        document.getElementById('timer_time').style.color = "#FF8800"
+                        document.getElementById('timer_time').style.fontSize = "120px"
+                    } else if (decompte <= 1 ) {
+                        document.getElementById('timer_time').style.color = "#FF0000"
+                        document.getElementById('timer_time').style.fontSize = "150px"
+                    }
+                } else {
+                    // cache le div de masquage de la page
+                    document.getElementById('cacheAtente').style.opacity = 1;
+                    document.getElementById('gameStart').innerHTML = ""
+                    document.getElementById('texteAttente').innerHTML = "TOO LATE !"
+                    document.getElementById('cacheAtente').style.backgroundColor = '#880000'
+                    clearInterval(tempsRestant);
+                }
+            }, 100);
         }
     </script>
 {% endblock %}
