@@ -29,4 +29,13 @@ class MainController extends AbstractController
     {
         return $this->render('oldMainPage/index.html.twig');
     }
+
+    /**
+     * @Route("/game" , name="game")
+     * @return Response
+     */
+    public function routeGame()
+    {
+        return $this->render('test_Xav/index.html.twig');
+    }
 }
