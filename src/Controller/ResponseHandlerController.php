@@ -32,20 +32,26 @@ class ResponseHandlerController extends AbstractController
             ->getRepository(Reponse::class)
             ->findBy(['question' => $question]);
 
-        $nouveauScore = $userDB->getScore();
 
         if ($answer == $entityManager[0]->getReponse()) {
             //var_dump("gagné");
+        $nouveauScore = $userDB->getScore();
             $nouveauScore += $time;
-        }   else {
-            //var_dump("perdu");
-            $nouveauScore -= $time;
-        }
             $userDB->setScore($nouveauScore);
         $trucManager = $this->getDoctrine()->getManager();
 
         $trucManager->persist($userDB);
         $trucManager->flush();
+        }   else {
+        $nouveauScore = $userDB->getScore();
+            //var_dump("perdu");
+            $nouveauScore -= $time;
+            $userDB->setScore($nouveauScore);
+        $trucManager = $this->getDoctrine()->getManager();
+
+        $trucManager->persist($userDB);
+        $trucManager->flush();
+        }
 
 
         return $this->render('responseHandler/responseHandler.html.twig');
