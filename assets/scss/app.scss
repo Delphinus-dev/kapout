@@ -94,11 +94,10 @@ i.fas {
 }
 
 footer {
+  height: 100px;
   background-color: #1D2F04;
   color: white;
-  display: flex;
-  justify-content: center;
-  align-content: center;
+  padding-right: 30px;
 }
 
 footer a {
@@ -106,15 +105,22 @@ footer a {
 }
 
 footer a:hover {
-  text-decoration: underline;
+  text-decoration: none;
+  color: #fff;
 }
 
 footer ul {
   list-style: none;
   display: flex;
-  justify-content: center;
+  justify-content: space-between;
   align-content: center;
   flex-direction: row;
+  align-items: center;
+  padding-top: 10px;
+}
+
+footer li {
+  margin-top: 10px;
 }
 
 @media screen and (max-width: 640px) {
