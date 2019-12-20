@@ -31,34 +31,11 @@ class MainController extends AbstractController
     }
 
     /**
-     * @Route("/questions", name="questionPage")
+     * @Route("/game" , name="game")
      * @return Response
-     * @throws ClientExceptionInterface
-     * @throws DecodingExceptionInterface
-     * @throws RedirectionExceptionInterface
-     * @throws ServerExceptionInterface
-     * @throws TransportExceptionInterface
      */
-    public function question()
+    public function routeGame()
     {
-        $api = new ApiGet();
-        $indexApi = $api->randTab();
-        var_dump($indexApi);
-        $indexAnswer = range(2,5);
-
-        shuffle($indexAnswer);
-        // Insérer la bonne réponse dans la base de données
-        var_dump($indexAnswer[3]);
-        $indexTab = [];
-        array_push($indexTab, $indexApi[0]);
-        array_push($indexTab, $indexApi[1]);
-        array_push($indexTab, $indexApi[$indexAnswer[0]]);
-        array_push($indexTab, $indexApi[$indexAnswer[1]]);
-        array_push($indexTab, $indexApi[$indexAnswer[2]]);
-        array_push($indexTab, $indexApi[$indexAnswer[3]]);
-        var_dump($indexTab);
-
-
-        return $this->render('questionPage/index.html.twig');
+        return $this->render('test_Xav/index.html.twig');
     }
 }
