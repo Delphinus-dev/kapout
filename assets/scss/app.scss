@@ -37,7 +37,7 @@ body {
   z-index: 1000;
 }
 
-#question {
+#question, #mission {
   color : $secondary-color-green;
   text-align: center;
 }
@@ -93,6 +93,10 @@ i.fas {
   font-size: 3rem;
 }
 
+#timer_time {
+  font-weight: 900;
+  font-size: .7em;
+}
 footer {
   height: 100px;
   background-color: #1D2F04;

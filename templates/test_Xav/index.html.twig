@@ -17,17 +17,17 @@
     </div>
     <div class="container align-content-center">
         <div class="col-12">
-            <h1 class="question my-4" id="question">what's the false claim</h1>
+            <h1 class="question my-4" id="mission">Find the false claim</h1>
         </div>
-        <div class="col-12 row justify-content-around">
-            <div class="timer" id="timer">
+        <div class="col-12 row justify-content-between">
+            <div class="timer col-3" id="timer">
                 <div>Timer</div>
                 <div id="timer_time"></div>
             </div>
-            <div class="card" style="width: 18rem;">
+            <div class="card col-3 rounded" style="width: 18rem;">
                 <img class="card-img-top" id="image" src="https://www.superherodb.com/pictures2/portraits/10/100/1496.jpg" alt="Mon super héros">
             </div>
-            <div class="nbAnswers column">
+            <div class="nbAnswers column col-3">
                 <div id="nbReponses">0</div>
             </div>
             <div class="col-12">
@@ -37,40 +37,40 @@
         <div class="card-deck">
             <div class="card row">
                 <div class="card-body">
-                    <div class="rouge row" >
+                    <div class="rouge row rounded" onclick="answer(1)">
                         <div class="col-md-4">
                             <i class="fas fa-snowman my-2 col-md-6" style="font-size: 6em"></i>
                         </div>
                         <div class="col-md-8" id="reponseRouge">
-                            Reponse A , je prend la réponse A
+                            <span id="reponseRougespan"></span>
                             </div>
                     </div>
-                    <div class="verte row">
+                    <div class="verte row rounded" onclick="answer(2)">
                         <div class="col-md-4">
                              <i class="fas fa-holly-berry my-2" style="font-size: 6em"></i>
                         </div>
                         <div class="col-md-8" id="reponseVerte">
-                            Reponse B , je prend la réponse B
+                            <span id="reponseVertespan"></span>
                         </div>
                     </div>
                 </div>
             </div>
             <div class="card row">
                 <div class="card-body">
-                    <div class="blanche row" >
+                    <div class="blanche row rounded" onclick="answer(3)">
                         <div class="col-md-4">
                             <i class="fas fa-candy-cane my-2 col-md-6" style="font-size: 6em"></i>
                         </div>
                         <div class="col-md-8" id="reponseBlanche">
-                            Reponse C , je prend la réponse C
+                            <span id="reponseBlanchespan"></span>
                         </div>
                     </div>
-                    <div class="doree row" >
+                    <div class="doree row rounded" onclick="answer(4)">
                         <div class="col-md-4">
                             <i class="fas fa-snowflake my-2" style="font-size: 6em"></i>
                         </div>
                         <div class="col-md-8" id="reponseDoree">
-                            Reponse D , je prend la réponse D
+                            <span id="reponseDoreespan"></span>
                         </div>
                     </div>
                 </div>
@@ -89,24 +89,19 @@
         // eventSource.onmessage = e => console.log(e);
         eventSource.onmessage = e => {
             document.getElementById('cacheAtente').style.backgroundColor = "#006622";
+            document.getElementById('timer_time').style.color = "#000"
             document.getElementById('timer_time').style.fontSize = "80px"
             const obj = JSON.parse(e.data);
             document.title = obj['titre'];
             document.getElementById('question').innerHTML = obj[0];
             document.getElementById('nbReponses').innerHTML = "";
             document.getElementById('image').setAttribute("src", obj[1]);
-            let p = document.createElement("span");
-            p.innerHTML = obj[2];
-            document.getElementById('reponseRouge').appendChild(p);
-            p = document.createElement("span");
-            p.innerHTML = obj[3];
-            document.getElementById('reponseVerte').appendChild(p);
-            p = document.createElement("span");
-            p.innerHTML = obj[4];
-            document.getElementById('reponseBlanche').appendChild(p);
-            p = document.createElement("span");
-            p.innerHTML = obj[5];
-            document.getElementById('reponseDoree').appendChild(p);
+
+            document.getElementById('reponseRougespan').innerHTML = obj[2]
+            document.getElementById('reponseVertespan').innerHTML = obj[3]
+            document.getElementById('reponseBlanchespan').innerHTML = obj[4]
+            document.getElementById('reponseDoreespan').innerHTML = obj[5]
+
             document.getElementById('texteAttente').innerHTML = 3
             document.getElementById('gameStart').innerHTML = "Game starts in"
             let intervalId = setInterval(function () {
@@ -117,6 +112,7 @@
                 } else {
                     // cache le div de masquage de la page
                     document.getElementById('cacheAtente').style.opacity = 0;
+                    document.getElementById('cacheAtente').style.display = "none";
                     document.getElementById('texteAttente').innerHTML = "";
                     document.getElementById('timer_time').innerHTML = obj[6];
                     clearInterval(intervalId);
@@ -125,12 +121,13 @@
             }, 1000);
         };
         const url2 = new URL('https://mercure.mr486.com/.well-known/mercure');
-        url2.searchParams.append('topic', 'reponses');
+        url2.searchParams.append('topic', 'reponse');
         const eventSource2 = new EventSource(url2);
-        eventSource2.onmessage = e2 => {
-            document.getElementById('nbReponses').innerHTML = e2.data;
-        };
-        function timer () {
+        eventSource2.onmessage = e => {
+            document.getElementById('gameStart').innerHTML = "La bonne réponse était "
+            document.getElementById('texteAttente').innerHTML =  e.data
+        }
+            function timer () {
             // alert(decompte);
             var tempsRestant = setInterval(function () {
                 let decompte = Number(document.getElementById('timer_time').innerHTML);
@@ -149,6 +146,7 @@
                     }
                 } else {
                     // cache le div de masquage de la page
+                    document.getElementById('cacheAtente').style.display = "block";
                     document.getElementById('cacheAtente').style.opacity = 1;
                     document.getElementById('gameStart').innerHTML = ""
                     document.getElementById('texteAttente').innerHTML = "TOO LATE !"
@@ -156,6 +154,16 @@
                     clearInterval(tempsRestant);
                 }
             }, 100);
+        }
+
+        function answer($id) {
+            document.getElementById('gameStart').innerHTML = ""
+            document.getElementById('texteAttente').innerHTML = "Wait for the others…"
+            document.getElementById('cacheAtente').style.backgroundColor = '#4466CC'
+            document.getElementById('cacheAtente').style.display = "block";
+            document.getElementById('cacheAtente').style.opacity = 1;
+            document.getElementById('timer_time').innerHTML = 9000;
+
         }
     </script>
 {% endblock %}
