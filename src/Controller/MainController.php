@@ -67,28 +67,50 @@ class MainController extends AbstractController
      */
     public function question()
     {
-        if ($this->getQuestions() < 8) {
-
+        switch (9) {
+        // switch ($this->getQuestions()) {
+            case 0 :
+            case 1 :
+            case 2 :
+            case 3 :
+            case 4 :
+            case 5 :
+            case 6 :
 
             $api = new ApiGet();
             $indexApi = $api->randTab();
             var_dump($indexApi);
-            $indexAnswer = range(2, 5);
+            break;
+            case 7 :
+                // SantaClaus
+                $indexApi = $this->santaClaus;
+                break;
+            case 8 :
+                // Yavuz
+                $indexApi = $this->yavuz;
+                break;
+            case 9 :
+                // Gilles
+                $indexApi = $this->samuel;
+                break;
 
-            shuffle($indexAnswer);
-            // Insérer la bonne réponse dans la base de données
-            var_dump($indexAnswer[3]);
-            $indexTab = [];
-            array_push($indexTab, $indexApi[0]);
-            array_push($indexTab, $indexApi[1]);
-            array_push($indexTab, $indexApi[$indexAnswer[0]]);
-            array_push($indexTab, $indexApi[$indexAnswer[1]]);
-            array_push($indexTab, $indexApi[$indexAnswer[2]]);
-            array_push($indexTab, $indexApi[$indexAnswer[3]]);
-            var_dump($indexTab);
-        } else {
+            default :
 
+                break;
         }
+        $indexAnswer = range(2, 5);
+
+        shuffle($indexAnswer);
+        // Insérer la bonne réponse dans la base de données
+        var_dump($indexAnswer[3]);
+        $indexTab = [];
+        array_push($indexTab, $indexApi[0]);
+        array_push($indexTab, $indexApi[1]);
+        array_push($indexTab, $indexApi[$indexAnswer[0]]);
+        array_push($indexTab, $indexApi[$indexAnswer[1]]);
+        array_push($indexTab, $indexApi[$indexAnswer[2]]);
+        array_push($indexTab, $indexApi[$indexAnswer[3]]);
+        var_dump($indexTab);
 
         return $this->render('questionPage/index.html.twig');
     }
