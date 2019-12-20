@@ -4,6 +4,7 @@
 namespace App\Controller;
 
 
+use App\Entity\User;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\Routing\Annotation\Route;
 use Symfony\Component\HttpFoundation\Response;
@@ -13,22 +14,36 @@ use App\Entity\Reponse;
 class ResponseHandlerController extends AbstractController
 {
     /**
-     * @Route("/responseHandler/{id}/{pin}/{question}/{answer}/{time}", name="response_handler")
+     * @Route("/responseHandler/{user}/{pin}/{question}/{answer}/{time}", name="response_handler")
      */
-    public function responseHandler(int $id, int $pin, int $question, int $answer, int $time)
+    public function responseHandler(int $user, int $pin, int $question, int $answer, int $time)
     {
-                var_dump($id);
-                var_dump($pin);
-                var_dump($question);
-                var_dump($answer);
-                var_dump($time);
+        $userDB = $this->getDoctrine()
+            ->getRepository(User::class)
+            ->find($user);
+//        var_dump($userDB);
 
         $entityManager = $this->getDoctrine()
             ->getRepository(Reponse::class)
-            ->findBy(['user' => $id]);
+            ->findBy(['question' => $question]);
+//        var_dump($entityManager[0]->getReponse());
 
+        if ($answer == $entityManager[0]->getReponse()) {
+            var_dump("gagné");
+            $nouveauScore = $userDB->getScore();
+            $nouveauScore += $time;
 
-        var_dump($entityManager);
+            $userDB->setScore($nouveauScore);
+
+            $trucManager = $this->getDoctrine()->getManager();
+
+            $trucManager->persist($userDB);
+            $trucManager->flush();
+
+            //défalque le nombre de secondes consommées * 5
+        }   else {
+            var_dump("perdu");
+        }
 
         return $this->render('responseHandler/responseHandler.html.twig');
     }

@@ -4,6 +4,7 @@
 namespace App\Controller;
 
 use App\Entity\Reponse;
+use App\Entity\User;
 use App\Service\ApiGet;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Response;
@@ -57,11 +58,18 @@ class BackOfficeController extends AbstractController
      */
     public function reponse()
     {
+        $bonneReponse  = $this->getDoctrine()
+        ->getRepository(Reponse::class)
+            ->findAll();
+        $maxA = max($bonneReponse);
+//        var_dump();
+//        var_dump($bonneReponse[max($bonneReponse)-1]['text']);
+
         define('PUBLIC_JWT', 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJtZXJjdXJlIjp7InB1Ymxpc2giOlsiKiJdfX0.NFCEbEEiI7zUxDU2Hj0YB71fQVT8YiQBGQWEyxWG0po');
         $postData = http_build_query([
             // On se place sur localhost:80, sur notre topic
             'topic' => 'reponse',
-            'data' => 'la réponse D',
+            'data' => $maxA->getText(),//'la réponse D',
         ]);
         $r = file_get_contents('https://mercure.mr486.com/.well-known/mercure', false, stream_context_create(['http' => [
             'method' => 'POST',
@@ -83,7 +91,12 @@ class BackOfficeController extends AbstractController
      */
     public function question()
     {
-        switch (9) {
+
+        $nbQuestions = $this->getDoctrine()
+            ->getRepository(Reponse::class)
+            ->countQuestions(231079);
+
+        switch ($nbQuestions) {
             // switch ($this->getQuestions()) {
             case 0 :
             case 1 :
@@ -118,9 +131,6 @@ class BackOfficeController extends AbstractController
         shuffle($indexAnswer);
         $newPos = array_search(5, $indexAnswer);
 
-        $nbQuestions = $this->getDoctrine()
-            ->getRepository(Reponse::class)
-            ->countQuestions(231079);
 
         // Insérer la bonne réponse dans la base de données
         $entityManager = $this->getDoctrine()->getManager();
