@@ -10,7 +10,7 @@
    <div class="container">
     <div id="cacheAtente" class="col-12 text-center align-content-center cacheAtente">
             <div class="textACentrer">
-                <div id="gameStart">Game starts in </div>
+                <div id="gameStart">Game starts soon</div>
                 <div id="texteAttente" ></div>
             </div>
         </div>
@@ -166,8 +166,8 @@
             console.log($temps)
             $idtemp = location.search
             $id = Math.round(parseInt($idtemp.replace(/[^\d]/g, "")))
-           $reponse = "http://localhost:8000/responseHandler/" + $id +"/231079/"+ $answer + "/" + $temps
-           // $reponse = "https://kapout.mr486.com/responseHandler/" + $id +"/231079/"+ $answer + "/" + $temps
+           // $reponse = "http://localhost:8000/responseHandler/" + $id +"/231079/"+ $answer + "/" + $temps
+           $reponse = "https://kapout.mr486.com/responseHandler/" + $id +"/231079/"+ $answer + "/" + $temps
             // console.log($reponse)
             var xhr = new XMLHttpRequest();
             xhr.open('GET', $reponse);
@@ -185,6 +185,8 @@
             }
             return f;
         }
+
+
     </script>
 {% endblock %}
 

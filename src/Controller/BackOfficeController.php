@@ -57,6 +57,27 @@ class BackOfficeController extends AbstractController
     }
 
     /**
+     * @Route("/HallOff", name="halloff")
+     */
+    public function halloff()
+    {
+
+        $reponse="<a href='/hall'>Click here to see the results !</a>";
+        define('PUBLIC_JWT', 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJtZXJjdXJlIjp7InB1Ymxpc2giOlsiKiJdfX0.NFCEbEEiI7zUxDU2Hj0YB71fQVT8YiQBGQWEyxWG0po');
+        $postData = http_build_query([
+            // On se place sur localhost:80, sur notre topic
+            'topic' => 'reponse',
+            'data' => $reponse,//'la réponse D',
+        ]);
+        $r = file_get_contents('https://mercure.mr486.com/.well-known/mercure', false, stream_context_create(['http' => [
+            'method' => 'POST',
+            'header' => "Content-type: application/x-www-form-urlencoded\r\nAuthorization: Bearer " . PUBLIC_JWT,
+            'content' => $postData,
+        ]]));
+        return $this->render('backOfficePage/index.html.twig');
+    }
+
+    /**
      * @Route("/reponse", name="reponse")
      */
     public function reponse()
@@ -105,22 +126,18 @@ class BackOfficeController extends AbstractController
             case 1 :
             case 2 :
             case 3 :
-            case 4 :
-            case 5 :
-            case 6 :
-
                 $api = new ApiGet();
                 $indexApi = $api->randTab();
                 break;
-            case 7 :
+            case 4 :
                 // SantaClaus
                 $indexApi = $this->santaClaus;
                 break;
-            case 8 :
+            case 5 :
                 // Yavuz
                 $indexApi = $this->yavuz;
                 break;
-            case 9 :
+            case 6 :
                 // Gilles
                 $indexApi = $this->samuel;
                 break;
