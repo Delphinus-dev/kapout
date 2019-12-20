@@ -4,6 +4,7 @@
 namespace App\Controller;
 
 use App\Service\ApiGet;
+use App\Entity\User;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
@@ -143,5 +144,41 @@ class BackOfficeController extends AbstractController
         ]]));
 
         return $this->render('questionPage/index.html.twig');
+    }
+   /* /**
+     *
+     *
+     * @return User|null
+     * @throws \Doctrine\ORM\NonUniqueResultException
+     */
+    /*public function halloffame()
+    {
+        return $this
+            ->createQueryBuilder("u")
+            ->orderBy("u.score", "DESC")
+            ->setMaxResults(3)
+            ->getQuery()
+            ->getOneOrNullResult();
+    }**/
+
+    /**
+     * @Route("/hall", name="halloffame")
+     * @return Response
+     */
+    public function hall() : Response
+    {
+        $score = new User();
+        if (!$score) {
+            throw $this->createNotFoundException(
+                'No score  found in user\'s table.'
+            );
+        }
+        $score =  $this ->getDoctrine()
+            ->getRepository(User::class)
+            ->findBy(['score'=>$score->getScore()], ['score'=>'DESC'], 3);
+
+        return $this->render('hall/index.html.twig',
+            ['score' => $score,
+            ]);
     }
 }
