@@ -72,16 +72,16 @@
                 <div class="container">
                     <div class="row mt-5">
                         <div class="col-md-6 mb-5 mt-md-0 mt-5 white-text text-center text-md-left">
-                            <h1 class="h1-responsive font-weight-bold wow fadeInLeft" data-wow-delay="0.3s">Sign up right now! </h1>
+                            <h1 class="h1-responsive font-weight-bold wow fadeInLeft" data-wow-delay="0.3s">Play right now! </h1>
                             <hr class="hr-light wow fadeInLeft" data-wow-delay="0.3s">
-                            <h3 class="mb-3 wow fadeInLeft" data-wow-delay="0.3s">Have fun with our's SUPERHEROES. <br> Come and Join Us on KAPOUT ! </h3>
+                            <h3 class="mb-3 wow fadeInLeft" data-wow-delay="0.3s">Do you know everything about SUPERHEROES? <br> Come and Join Us on KAPOUT ! </h3>
                         </div>
                         <div class="col-md-6 col-xl-5 mb-4">
                             <div class="card2 wow fadeInRight " data-wow-delay="0.3s">
                                 <div class="card-body">
                                     <div class="text-center">
                                         <h3 class="white-text">
-                                            <i class="fas fa-user white-text"></i>  Registration</h3>
+                                            <i class="fas fa-user white-text"></i>Sign in</h3>
                                         <hr class="hr-light">
                                     </div>
                                     {{ form_start(form) }}
@@ -93,6 +93,8 @@
                                         <i class="fas fa-ghost prefix white-text active"></i>
                                         {{ form_widget(form.login) }}
                                         {{ form_errors(form.login) }}
+                                        <input type="email" id="form2" class="white-text form-control">
+                                        <label for="form2" class="active enter">Choose nickname</label>
                                     </div>
                                     <div class="text-center mt-4">
                                         <button class="btn btn-indigo">{{ button_label|default('save') }}</button>
@@ -110,8 +112,8 @@
         <div class="container">
             <div class="row py-5">
                 <div class="col-md-12 text-center">
-                    <h3>Welcome to the KAPOUT team game, you are now in the world of KAPOUT 4.0.<br>
-                        We hope you will enjoy it.</h3>
+                    <h3>Welcome to the KAPOUT minigame, you are now entering the world of KAPOUT 4.0.<br>
+                        We hope you'll enjoy it!</h3>
                 </div>
             </div>
         </div>
